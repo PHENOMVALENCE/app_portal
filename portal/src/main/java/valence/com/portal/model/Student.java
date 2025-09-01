@@ -18,8 +18,6 @@ public class Student {
     private Integer id;
     private String fullname;
     private String email;
-    private String course;
-    private Integer year;
     private String password;
 
     @OneToOne
