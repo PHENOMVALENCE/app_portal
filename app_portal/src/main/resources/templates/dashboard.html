@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <main>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h2 mb-0">
+                <i class="fas fa-tachometer-alt me-2 text-primary"></i>
+                Dashboard
+            </h1>
+            <div class="text-muted">
+                <i class="fas fa-calendar me-1"></i>
+                <span th:text="${#temporals.format(#temporals.createNow(), 'MMMM dd, yyyy')}"></span>
+            </div>
+        </div>
+        
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card stats-card">
+                    <div class="card-body text-center">
+                        <div class="stats-number" th:text="${totalStudents}">0</div>
+                        <div class="h6 mb-0">Total Students</div>
+                        <small class="opacity-75">
+                            <span th:text="${activeStudents}">0</span> active
+                        </small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card stats-card">
+                    <div class="card-body text-center">
+                        <div class="stats-number" th:text="${totalCourses}">0</div>
+                        <div class="h6 mb-0">Total Courses</div>
+                        <small class="opacity-75">
+                            <span th:text="${availableCourses}">0</span> available
+                        </small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card stats-card">
+                    <div class="card-body text-center">
+                        <div class="stats-number">5</div>
+                        <div class="h6 mb-0">Departments</div>
+                        <small class="opacity-75">Active programs</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card stats-card">
+                    <div class="card-body text-center">
+                        <div class="stats-number">3.7</div>
+                        <div class="h6 mb-0">Avg GPA</div>
+                        <small class="opacity-75">This semester</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-bolt me-2"></i>
+                            Quick Actions
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 mb-2">
+                                <a href="/students/add" class="btn btn-primary w-100">
+                                    <i class="fas fa-user-plus me-2"></i>
+                                    Add Student
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <a href="/courses/add" class="btn btn-secondary w-100">
+                                    <i class="fas fa-book-plus me-2"></i>
+                                    Add Course
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <a href="/grades/add" class="btn btn-success w-100">
+                                    <i class="fas fa-plus me-2"></i>
+                                    Add Grade
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <a href="/swagger-ui.html" class="btn btn-info w-100">
+                                    <i class="fas fa-code me-2"></i>
+                                    API Docs
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activity -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-user-graduate me-2"></i>
+                            Recent Students
+                        </h5>
+                        <a href="/students" class="btn btn-sm btn-outline-primary">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${#lists.isEmpty(recentStudents)}" class="text-muted text-center py-3">
+                            No students found
+                        </div>
+                        <div th:each="student : ${recentStudents}" class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <div>
+                                <div class="fw-semibold" th:text="${student.fullName}">Student Name</div>
+                                <small class="text-muted">
+                                    <span th:text="${student.studentId}">STU001</span> • 
+                                    <span th:text="${student.major}">Computer Science</span>
+                                </small>
+                            </div>
+                            <div>
+                                <span class="badge bg-success" th:if="${student.status.name() == 'ACTIVE'}">Active</span>
+                                <span class="badge bg-secondary" th:if="${student.status.name() != 'ACTIVE'}" th:text="${student.status}">Status</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-book me-2"></i>
+                            Recent Courses
+                        </h5>
+                        <a href="/courses" class="btn btn-sm btn-outline-primary">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${#lists.isEmpty(recentCourses)}" class="text-muted text-center py-3">
+                            No courses found
+                        </div>
+                        <div th:each="course : ${recentCourses}" class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <div>
+                                <div class="fw-semibold" th:text="${course.courseName}">Course Name</div>
+                                <small class="text-muted">
+                                    <span th:text="${course.courseCode}">CS101</span> • 
+                                    <span th:text="${course.department}">Computer Science</span>
+                                </small>
+                            </div>
+                            <div class="text-end">
+                                <div class="small text-muted">
+                                    <span th:text="${course.currentEnrollment}">0</span>/<span th:text="${course.maxCapacity}">30</span>
+                                </div>
+                                <div class="small">
+                                    <span th:text="${course.creditHours}">3</span> credits
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

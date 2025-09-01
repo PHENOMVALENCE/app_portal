@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>API Documentation</title>
+</head>
+<body>
+    <main>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h2 mb-0">
+                <i class="fas fa-code me-2 text-primary"></i>
+                API Documentation
+            </h1>
+            <div class="d-flex gap-2">
+                <a href="/swagger-ui.html" class="btn btn-primary" target="_blank">
+                    <i class="fas fa-external-link-alt me-2"></i>
+                    Interactive API Docs
+                </a>
+                <a href="/api-docs" class="btn btn-outline-primary" target="_blank">
+                    <i class="fas fa-download me-2"></i>
+                    OpenAPI Spec
+                </a>
+            </div>
+        </div>
+        
+        <!-- API Overview -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            API Overview
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="lead">
+                            The University Student Portal API provides comprehensive endpoints for managing student information, 
+                            courses, grades, and administrative operations.
+                        </p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-server me-2"></i>Base URL</h6>
+                                <code>http://localhost:8080/api</code>
+                                
+                                <h6 class="mt-3"><i class="fas fa-shield-alt me-2"></i>Authentication</h6>
+                                <p class="mb-0">HTTP Basic Authentication</p>
+                                <small class="text-muted">Username: admin, Password: admin123</small>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-file-code me-2"></i>Response Format</h6>
+                                <p class="mb-0">JSON</p>
+                                
+                                <h6 class="mt-3"><i class="fas fa-tags me-2"></i>API Version</h6>
+                                <p class="mb-0">v1.0.0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- API Endpoints -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-user-graduate me-2 text-primary"></i>
+                            Student Management
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Manage student records, enrollment, and academic information.</p>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/students</code>
+                            </div>
+                            <small class="text-muted">Get all students</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/students/{id}</code>
+                            </div>
+                            <small class="text-muted">Get student by ID</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">POST</span>
+                                <code class="flex-grow-1 ms-2">/api/students</code>
+                            </div>
+                            <small class="text-muted">Create new student</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-warning">PUT</span>
+                                <code class="flex-grow-1 ms-2">/api/students/{id}</code>
+                            </div>
+                            <small class="text-muted">Update student</small>
+                        </div>
+                        
+                        <div class="api-endpoint">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-danger">DELETE</span>
+                                <code class="flex-grow-1 ms-2">/api/students/{id}</code>
+                            </div>
+                            <small class="text-muted">Delete student</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-book me-2 text-secondary"></i>
+                            Course Management
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Manage course catalog, enrollment, and course information.</p>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/courses</code>
+                            </div>
+                            <small class="text-muted">Get all courses</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/courses/{id}</code>
+                            </div>
+                            <small class="text-muted">Get course by ID</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">POST</span>
+                                <code class="flex-grow-1 ms-2">/api/courses</code>
+                            </div>
+                            <small class="text-muted">Create new course</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">POST</span>
+                                <code class="flex-grow-1 ms-2">/api/courses/{id}/enroll/{studentId}</code>
+                            </div>
+                            <small class="text-muted">Enroll student in course</small>
+                        </div>
+                        
+                        <div class="api-endpoint">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-danger">DELETE</span>
+                                <code class="flex-grow-1 ms-2">/api/courses/{id}/unenroll/{studentId}</code>
+                            </div>
+                            <small class="text-muted">Unenroll student from course</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-4">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-line me-2 text-success"></i>
+                            Grade Management
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Manage student grades, GPA calculations, and academic performance.</p>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/grades</code>
+                            </div>
+                            <small class="text-muted">Get all grades</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/grades/student/{id}</code>
+                            </div>
+                            <small class="text-muted">Get grades by student</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/grades/student/{id}/gpa</code>
+                            </div>
+                            <small class="text-muted">Calculate student GPA</small>
+                        </div>
+                        
+                        <div class="api-endpoint">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">POST</span>
+                                <code class="flex-grow-1 ms-2">/api/grades</code>
+                            </div>
+                            <small class="text-muted">Create new grade</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-tachometer-alt me-2 text-info"></i>
+                            Dashboard & Analytics
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Access dashboard statistics and system analytics.</p>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/dashboard/stats</code>
+                            </div>
+                            <small class="text-muted">Get dashboard statistics</small>
+                        </div>
+                        
+                        <div class="api-endpoint mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">GET</span>
+                                <code class="flex-grow-1 ms-2">/api/dashboard/student/{id}</code>
+                            </div>
+                            <small class="text-muted">Get student overview</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sample Requests -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-code me-2"></i>
+                            Sample API Requests
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Create Student</h6>
+                                <pre class="bg-light p-3 rounded"><code>POST /api/students
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+
+{
+  "studentId": "STU001",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@student.edu",
+  "major": "Computer Science",
+  "year": 3,
+  "status": "ACTIVE"
+}</code></pre>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Get Student Grades</h6>
+                                <pre class="bg-light p-3 rounded"><code>GET /api/grades/student/1
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+
+Response:
+[
+  {
+    "id": 1,
+    "gradeValue": 3.7,
+    "letterGrade": "A_MINUS",
+    "assignmentType": "Final Exam",
+    "course": {
+      "courseCode": "CS101",
+      "courseName": "Intro to Programming"
+    }
+  }
+]</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Error Codes -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            HTTP Status Codes
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Success Codes</h6>
+                                <ul class="list-unstyled">
+                                    <li><span class="badge bg-success me-2">200</span> OK - Request successful</li>
+                                    <li><span class="badge bg-success me-2">201</span> Created - Resource created</li>
+                                    <li><span class="badge bg-success me-2">204</span> No Content - Resource deleted</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Error Codes</h6>
+                                <ul class="list-unstyled">
+                                    <li><span class="badge bg-warning me-2">400</span> Bad Request - Invalid input</li>
+                                    <li><span class="badge bg-warning me-2">401</span> Unauthorized - Authentication required</li>
+                                    <li><span class="badge bg-danger me-2">404</span> Not Found - Resource not found</li>
+                                    <li><span class="badge bg-danger me-2">409</span> Conflict - Resource already exists</li>
+                                    <li><span class="badge bg-danger me-2">500</span> Internal Server Error</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <style>
+        .api-endpoint {
+            padding: 0.5rem;
+            border-left: 3px solid var(--bs-border-color);
+            background-color: var(--bs-light);
+            border-radius: 0.25rem;
+        }
+        
+        .api-endpoint code {
+            background: transparent;
+            color: var(--bs-dark);
+            font-size: 0.875rem;
+        }
+        
+        pre {
+            font-size: 0.8rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</body>
+</html>

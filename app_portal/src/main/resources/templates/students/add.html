@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Add Student</title>
+</head>
+<body>
+    <main>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h2 mb-0">
+                <i class="fas fa-user-plus me-2 text-primary"></i>
+                Add Student
+            </h1>
+            <a href="/students" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>
+                Back to Students
+            </a>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Student Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/students/add}" th:object="${student}" method="post">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="studentId" class="form-label">Student ID *</label>
+                                    <input type="text" class="form-control" id="studentId" th:field="*{studentId}" required>
+                                    <div th:if="${#fields.hasErrors('studentId')}" class="text-danger small mt-1">
+                                        <span th:errors="*{studentId}"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                                    <div th:if="${#fields.hasErrors('email')}" class="text-danger small mt-1">
+                                        <span th:errors="*{email}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+                                    <div th:if="${#fields.hasErrors('firstName')}" class="text-danger small mt-1">
+                                        <span th:errors="*{firstName}"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+                                    <div th:if="${#fields.hasErrors('lastName')}" class="text-danger small mt-1">
+                                        <span th:errors="*{lastName}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="major" class="form-label">Major *</label>
+                                    <select class="form-select" id="major" th:field="*{major}" required>
+                                        <option value="">Select Major</option>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Physics">Physics</option>
+                                        <option value="Chemistry">Chemistry</option>
+                                        <option value="English Literature">English Literature</option>
+                                        <option value="Business Administration">Business Administration</option>
+                                        <option value="Psychology">Psychology</option>
+                                        <option value="Biology">Biology</option>
+                                    </select>
+                                    <div th:if="${#fields.hasErrors('major')}" class="text-danger small mt-1">
+                                        <span th:errors="*{major}"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="year" class="form-label">Academic Year</label>
+                                    <select class="form-select" id="year" th:field="*{year}">
+                                        <option value="">Select Year</option>
+                                        <option value="1">1st Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option value="3">3rd Year</option>
+                                        <option value="4">4th Year</option>
+                                        <option value="5">5th Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select class="form-select" id="status" th:field="*{status}">
+                                        <option value="ACTIVE">Active</option>
+                                        <option value="INACTIVE">Inactive</option>
+                                        <option value="GRADUATED">Graduated</option>
+                                        <option value="SUSPENDED">Suspended</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>
+                                    Save Student
+                                </button>
+                                <a href="/students" class="btn btn-secondary">
+                                    <i class="fas fa-times me-2"></i>
+                                    Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

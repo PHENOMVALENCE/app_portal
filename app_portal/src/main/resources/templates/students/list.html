@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Students</title>
+</head>
+<body>
+    <main>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h2 mb-0">
+                <i class="fas fa-user-graduate me-2 text-primary"></i>
+                Students
+            </h1>
+            <a href="/students/add" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>
+                Add Student
+            </a>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <div th:if="${#lists.isEmpty(students)}" class="text-center py-5">
+                    <i class="fas fa-user-graduate fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No students found</h5>
+                    <p class="text-muted">Get started by adding your first student.</p>
+                    <a href="/students/add" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>
+                        Add Student
+                    </a>
+                </div>
+                
+                <div th:if="${!#lists.isEmpty(students)}" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Major</th>
+                                <th>Year</th>
+                                <th>GPA</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="student : ${students}">
+                                <td>
+                                    <span class="fw-semibold" th:text="${student.studentId}">STU001</span>
+                                </td>
+                                <td th:text="${student.fullName}">John Doe</td>
+                                <td th:text="${student.email}">john@example.com</td>
+                                <td th:text="${student.major}">Computer Science</td>
+                                <td>
+                                    <span th:if="${student.year != null}" th:text="${student.year}">3</span>
+                                    <span th:if="${student.year == null}" class="text-muted">-</span>
+                                </td>
+                                <td>
+                                    <span th:if="${student.gpa != null}" th:text="${#numbers.formatDecimal(student.gpa, 1, 2)}">3.75</span>
+                                    <span th:if="${student.gpa == null}" class="text-muted">-</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-success" th:if="${student.status.name() == 'ACTIVE'}">Active</span>
+                                    <span class="badge bg-warning" th:if="${student.status.name() == 'INACTIVE'}">Inactive</span>
+                                    <span class="badge bg-info" th:if="${student.status.name() == 'GRADUATED'}">Graduated</span>
+                                    <span class="badge bg-danger" th:if="${student.status.name() == 'SUSPENDED'}">Suspended</span>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a th:href="@{/students/view/{id}(id=${student.id})}" class="btn btn-sm btn-outline-info">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form th:action="@{/students/delete/{id}(id=${student.id})}" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger btn-delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
