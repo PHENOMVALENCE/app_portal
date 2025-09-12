@@ -1,19 +1,16 @@
 package application.com.portal.repository;
 
-
-
-
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import application.com.portal.model.Student;
 import application.com.portal.model.User;
 
 @Repository
-
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 	
-    Optional<User> findByUsername(String username);
-    Optional<User> findByEmail(String email);
+	  Optional<Student> findByUser(User user);
+
 }

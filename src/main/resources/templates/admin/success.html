@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Successful - Stanbic Internship Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --stanbic-blue: #0033a0;
+            --stanbic-light-blue: #0065d9;
+            --stanbic-white: #ffffff;
+        }
+        .stanbic-bg {
+            background-color: var(--stanbic-blue);
+        }
+        .btn-stanbic {
+            background-color: var(--stanbic-blue);
+            color: white;
+        }
+        .btn-stanbic:hover {
+            background-color: var(--stanbic-light-blue);
+            color: white;
+        }
+        .success-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--stanbic-blue) 0%, var(--stanbic-light-blue) 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="card border-0 card-shadow">
+                        <div class="card-body p-5 text-center">
+                            <div class="stanbic-bg rounded-circle d-inline-flex p-4 mb-4">
+                                <i class="bi bi-check-circle-fill text-white fs-1"></i>
+                            </div>
+                            <h2 class="fw-bold mb-3">Application Submitted Successfully!</h2>
+                            <p class="text-muted mb-4">Your internship application has been received and is being processed. You will receive a confirmation email shortly.</p>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify

@@ -1,6 +1,5 @@
 package application.com.portal.service;
 
-public interface ApplicationService {
-	
+public class StudentService {
 
 }

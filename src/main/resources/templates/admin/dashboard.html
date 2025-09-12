@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Stanbic Internship Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --stanbic-blue: #0033a0;
+            --stanbic-light-blue: #0065d9;
+            --stanbic-white: #ffffff;
+        }
+        .sidebar {
+            background-color: var(--stanbic-blue);
+            color: white;
+            min-height: 100vh;
+        }
+        .navbar-custom {
+            background-color: var(--stanbic-blue);
+        }
+        .btn-stanbic {
+            background-color: var(--stanbic-blue);
+            color: white;
+        }
+        .btn-stanbic:hover {
+            background-color: var(--stanbic-light-blue);
+            color: white;
+        }
+        .status-approved {
+            color: #198754;
+        }
+        .status-pending {
+            color: #ffc107;
+        }
+        .status-rejected {
+            color: #dc3545;
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-bank me-2"></i>Stanbic Internship Portal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle me-1"></i> Admin User
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar d-md-block p-4">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white active" href="#">
+                                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white" href="#">
+                                <i class="bi bi-file-earmark-text me-2"></i> Applications
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white" href="#">
+                                <i class="bi bi-bar-chart me-2"></i> Reports
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white" href="#">
+                                <i class="bi bi-people me-2"></i> Manage Users
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Admin Dashboard</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Applications</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${stats.totalApplications}">142</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-file-text fs-1 text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Approved</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${stats.approvedApplications}">45</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-check-circle fs-1 text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${stats.pendingApplications}">67</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-clock-history fs-1 text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-danger shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Rejected</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${stats.rejectedApplications}">30</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-x-circle fs-1 text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Table -->
+                <div class="card">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Student Applications</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th>University</th>
+                                        <th>Internship Type</th>
+                                        <th>Application Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="application : ${applications}">
+                                        <td th:text="${application.student.fullName}">John Doe</td>
+                                        <td th:text="${application.student.university}">University of Nairobi</td>
+                                        <td th:text="${application.internshipType}">IT Internship</td>
+                                        <td th:text="${#temporals.format(application.applicationDate, 'dd MMM yyyy')}">15 Jun 2023</td>
+                                        <td>
+                                            <span th:if="${application.status == 'APPROVED'}" class="badge bg-success status-approved">Approved</span>
+                                            <span th:if="${application.status == 'PENDING'}" class="badge bg-warning status-pending">Pending</span>
+                                            <span th:if="${application.status == 'REJECTED'}" class="badge bg-danger status-rejected">Rejected</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#applicationModal" 
+                                                th:attr="data-bs-student-name=${application.student.fullName},
+                                                         data-bs-university=${application.student.university},
+                                                         data-bs-course=${application.student.course},
+                                                         data-bs-email=${application.student.email},
+                                                         data-bs-phone=${application.student.phone},
+                                                         data-bs-type=${application.internshipType},
+                                                         data-bs-date=${#temporals.format(application.applicationDate, 'dd MMM yyyy')},
+                                                         data-bs-status=${application.status}">
+                                                View Details
+                                            </button>
+                                            <button th:if="${application.status == 'PENDING'}" class="btn btn-sm btn-success ms-1">Approve</button>
+                                            <button th:if="${application.status == 'PENDING'}" class="btn btn-sm btn-danger ms-1">Reject</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Application Details Modal -->
+    <div class="modal fade" id="applicationModal" tabindex="-1" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applicationModalLabel">Application Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h6>Student Information</h6>
+                            <p><strong>Name:</strong> <span id="modalStudentName"></span></p>
+                            <p><strong>University:</strong> <span id="modalUniversity"></span></p>
+                            <p><strong>Course:</strong> <span id="modalCourse"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Contact Information</h6>
+                            <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+                            <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Application Details</h6>
+                            <p><strong>Internship Type:</strong> <span id="modalType"></span></p>
+                            <p><strong>Application Date:</strong> <span id="modalDate"></span></p>
+                            <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Documents</h6>
+                            <p><strong>CV:</strong> <a href="#" class="text-decoration-none">Download CV</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-stanbic">Download Full Application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Modal data handling
+        var applicationModal = document.getElementById('applicationModal');
+        applicationModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            
+            document.getElementById('modalStudentName').textContent = button.getAttribute('data-bs-student-name');
+            document.getElementById('modalUniversity').textContent = button.getAttribute('data-bs-university');
+            document.getElementById('modalCourse').textContent = button.getAttribute('data-bs-course');
+            document.getElementById('modalEmail').textContent = button.getAttribute('data-bs-email');
+            document.getElementById('modalPhone').textContent = button.getAttribute('data-bs-phone');
+            document.getElementById('modalType').textContent = button.getAttribute('data-bs-type');
+            document.getElementById('modalDate').textContent = button.getAttribute('data-bs-date');
+            
+            var status = button.getAttribute('data-bs-status');
+            var statusElement = document.getElementById('modalStatus');
+            
+            if (status === 'APPROVED') {
+                statusElement.innerHTML = '<span class="badge bg-success">Approved</span>';
+            } else if (status === 'PENDING') {
+                statusElement.innerHTML = '<span class="badge bg-warning">Pending</span>';
+            } else if (status === 'REJECTED') {
+                statusElement.innerHTML = '<span class="badge bg-danger">Rejected</span>';
+            }
+        });
+    </script>
+</body>
+</html>

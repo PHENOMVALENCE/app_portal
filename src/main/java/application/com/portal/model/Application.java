@@ -1,7 +1,13 @@
 package application.com.portal.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import lombok.Data;
 
 
@@ -9,17 +15,18 @@ import lombok.Data;
 @Data
 
 public class Application {
-	
-	@jakarta.persistence.Id
-	@GeneratedValue
-	
-	private Long Id;
-	private String FirstName;
-	private String LastName;
-	private String email;
-	private Long RegNo;
-	private String University;
-	
-	
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String internshipType; 
+    private String status = "PENDING"; 
+    private String resumePath; 
+    private LocalDateTime appliedAt = LocalDateTime.now();
+
+    
+    @ManyToMany
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
 }
