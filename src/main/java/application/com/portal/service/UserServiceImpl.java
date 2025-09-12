@@ -25,21 +25,27 @@ public class UserServiceImpl implements UserService {
 		user.setRole(role);
 		return userRepository.save(user);
 		} catch (Exception e) { 
-			throw new RuntimeErrorException("Error Registering user: " + e.getMessage());
+			throw new RuntimeException("Error Registering user: " + e.getMessage());
 		}
 		
 	}
 
 	@Override
 	public Optional<User> findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+           try {
+           return userRepository.findByUsername(username);
+           } catch (Exception e) {
+        	   throw new RuntimeException("Error finding user by username: " + e.getMessage());
+           }
+		
 	}
 
 	@Override
 	public Optional<User> findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
-
+	    try {
+	           return userRepository.findByEmail(email);
+	           } catch (Exception e) {
+	        	   throw new RuntimeException("Error finding user by email: " + e.getMessage());
+	           }
+}
 }
